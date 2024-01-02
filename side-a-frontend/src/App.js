@@ -1,7 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() { //초기 react 구동
+import React from "react";
+import axios from "axios";
+
+function MainPageComponent() {
+  const [products, setProducts] = React.useState([]);
+  React.useState(function () {
+    axios
+      .get(
+        "https://localhost:8080/test"
+      )
+      .then(function (result) {
+        const products = result.data.products;
+        setProducts(products);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -11,7 +29,7 @@ function App() { //초기 react 구동
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://naver.com"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -22,4 +40,4 @@ function App() { //초기 react 구동
   );
 }
 
-export default App;
+export default MainPageComponent;
